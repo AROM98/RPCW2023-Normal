@@ -1,0 +1,171 @@
+Exrcicio 1:
+
+1.1.
+Ficheiro JSON fornecido foi importado para o MongoDB através do comando:
+mongoimport -d scienceJobs -c contracts --file emprego-cientifico.json --jsonArray
+
+1.2.
+
+1. db.contracts.find({}).count()
+Existem 17943 contractos.
+
+2. db.contracts.find({"InstituicaoEnsino" : "Universidade do Minho"}).count()
+1399
+
+
+3. db.contracts.distinct("AreaCNAEF")
+[
+  '',
+  'Agricultura sem definição precisa',
+  'Agricultura, silvicultura, pescas e ciências veterinárias sem definição precisa',
+  'Ambiente sem definição precisa',
+  'Ambientes naturais e vida selvagem',
+  'Aprendizagem de línguas',
+  'Arquitetura e construção sem definição precisa',
+  'Arquitetura e urbanismo',
+  'Artes e humanidades sem definição precisa',
+  'Artes sem definição precisa',
+  'Artesanato',
+  'Belas-artes',
+  'Biblioteconomia, arquivística e ciências da informação',
+  'Biologia',
+  'Bioquímica',
+  'Ciências biológicas e ciências afins sem definição precisa',
+  'Ciências da educação',
+  'Ciências da terra',
+  'Ciências dentárias',
+  'Ciências do ambiente',
+  'Ciências empresariais e administração sem definição precisa',
+  'Ciências empresariais, administração e direito sem definição precisa',
+  'Ciências farmacêuticas',
+  'Ciências físicas sem definição precisa',
+  'Ciências naturais, matemática e estatística sem definição precisa',
+  'Ciências políticas e cidadania',
+  'Ciências sociais e comportamentais sem definição precisa',
+  'Ciências sociais, jornalismo e informação sem definição precisa',
+  'Ciências veterinárias',
+  'Competências laborais',
+  'Construção civil e engenharia civil',
+  'Contabilidade e fiscalidade',
+  'Desenvolvimento e análise de software e aplicações informáticas',
+  'Design de moda, de interiores e industrial',
+  'Design e administração de bases de dados e de redes informáticas',
+  'Desporto',
+  'Direito',
+  'Economia',
+  'Eletricidade e energia',
+  'Eletrónica e automação',
+  'Enfermagem geral e enfermagem obstétrica',
+  'Engenharia e tecnologias afins sem definição precisa',
+  'Engenharia química e de processos',
+  'Engenharia, indústrias transformadoras e construção sem definição precisa',
+  'Estatística',
+  'Filosofia e ética',
+  'Finanças, banca e seguros',
+  'Formação de educadores de infância',
+  'Formação de professores de áreas disciplinares específicas',
+  'Formação de professores de áreas disciplinares não específicas',
+  'Física',
+  'Gestão e administração',
+  'História e arqueologia',
+  'Horticultura',
+  'Humanidades (exceto línguas) sem definição precisa',
+  'Indústrias alimentares',
+  'Indústrias extrativas',
+  'Informática na ótica do utilizador',
+  'Jornalismo e informação sem definição precisa',
+  'Jornalismo e reportagem',
+  'Literatura e linguística',
+  'Línguas sem definição precisa',
+  'Marketing e publicidade',
+  'Matemática',
+  'Matemática e estatística sem definição precisa',
+  'Materiais (vidro, papel, plástico e madeira)',
+  'Medicina',
+  'Medicina tradicional e complementar e terapia',
+  'Metalurgia e metalomecânica',
+  'Música e artes do espetáculo',
+  'Pescas',
+  'Produção agrícola e animal',
+  'Programas de Agricultura não classificados noutras áreas',
+  'Programas de Artes  não classificados noutras áreas',
+  'Programas de Artes e humanidades não classificados noutras áreas',
+  'Programas de Ciências biológicas e ciências afins não classificados noutras áreas',
+  'Programas de Ciências empresariais e administração não classificados noutras áreas',
+  'Programas de Ciências empresariais, administração e direito não classificados noutras áreas',
+  'Programas de Ciências físicas não classificados noutras áreas',
+  'Programas de Ciências sociais e comportamentais não classificados noutras áreas',
+  'Programas de Ciências sociais, jornalismo e informação não classificados noutras áreas',
+  'Programas de Educação não classificados noutras áreas',
+  'Programas de Educação sem definição precisa',
+  'Programas de Engenharia e tecnologias afins não classificados noutras áreas',
+  'Programas de Engenharia, indústrias transformadoras e construção não classificados noutras áreas',
+  'Programas de Humanidades (exceto línguas) não classificados noutras áreas',
+  'Programas de Indústrias transformadoras não classificados noutras áreas',
+  'Programas de Jornalismo e informação não classificados noutras áreas',
+  'Programas de Línguas não classificados noutras áreas',
+  'Programas de Proteção social não classificados noutras áreas',
+  'Programas de Saúde e proteção social não classificados noutras áreas',
+  'Programas de Saúde não classificados noutras áreas',
+  'Programas de Tecnologias da informação e comunicação (TICs) não classificados noutras áreas',
+  'Programas e qualificações genéricos sem definição precisa',
+  'Programas e qualificações interdisciplinares que envolvem a Educação',
+  'Programas e qualificações interdisciplinares que envolvem a Engenharia, indústrias transformadoras e construção',
+  'Programas e qualificações interdisciplinares que envolvem as Artes e humanidades',
+  'Programas e qualificações interdisciplinares que envolvem as Ciências naturais, matemática e estatística',
+  'Programas e qualificações interdisciplinares que envolvem as Tecnologias da Informação e Comunicação (TICs)',
+  'Proteção social sem definição precisa',
+  ... 20 more items
+]
+
+4. 
+
+5. 
+db.contracts.aggregate([{$group: {_id: "$NomeInstituicao",count: { $sum: 1 }}}, {$sort: {count: -1}}])
+O resultado é uma lista com o nome das instituições e o número de contratos que cada uma tem, por ordem decrescente de número de contratos.
+[
+  { _id: 'Universidade de Aveiro', count: 1066 },
+  { _id: 'ISCTE - Instituto Universitário de Lisboa', count: 510 },
+  {
+    _id: 'Universidade de Coimbra - Faculdade de Ciências e Tecnologia',
+    count: 482
+  },
+  {
+    _id: 'Universidade do Porto - Faculdade de Engenharia',
+    count: 432
+  },
+  {
+    _id: 'Universidade Nova de Lisboa - Faculdade de Ciências Sociais e Humanas',
+    count: 421
+  },
+  {
+    _id: 'Universidade de Lisboa - Instituto Superior Técnico',
+    count: 366
+  },
+  {
+    _id: 'Universidade Nova de Lisboa - Faculdade de Ciências e Tecnologia',
+    count: 341
+  },
+  { _id: 'Universidade do Minho - Escola de Engenharia', count: 334 },
+  { _id: 'Universidade de Lisboa - Faculdade de Ciências', count: 328 },
+  { _id: 'Universidade do Porto - Faculdade de Ciências', count: 313 },
+  { _id: 'Universidade de Trás-os-Montes e Alto Douro', count: 303 },
+  { _id: 'Instituto Universitário da Maia - ISMAI', count: 269 },
+  { _id: 'Universidade do Porto - Faculdade de Medicina', count: 254 },
+  {
+    _id: 'Universidade Lusófona de Humanidades e Tecnologias',
+    count: 247
+  },
+  { _id: 'Universidade Aberta', count: 246 },
+  ...
+]
+
+1.3. 
+Para a API de Dados, vou usar o seguinte comando para gerar os ficheiros base:
+npx express-generator --view=false
+
+as views são descartadas.
+
+2. Neste exercicios, so passos são similares, mas desta vez usa-se as view do pug, para criar as páginas.
+Foram feitas as rotas descritas no enunciado. Para obter os dados da base de dados, foi usado o axios para 
+fazer os pedidos à API de dados.
